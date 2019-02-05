@@ -4,9 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ahasanidea.navcom.R
 import com.ahasanidea.navcom.data.Note
+import com.ahasanidea.navcom.fragments.NoteListFragmentDirections
+import kotlinx.android.synthetic.main.note_item.view.*
 
 class NoteAdapter(val noteList:List<Note>) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,12 +23,18 @@ class NoteAdapter(val noteList:List<Note>) : RecyclerView.Adapter<NoteAdapter.Vi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val note = noteList[position]
-        holder.id.text = note.id.toString()
-        holder.text.text = note.text
+        holder.bind(note)
     }
 
-    class ViewHolder(item:View) :RecyclerView.ViewHolder(item)  {
-        val id: TextView = item.findViewById(R.id.noteId)
-        val text: TextView = item.findViewById(R.id.noteText)
+
+    class ViewHolder( val item:View) :RecyclerView.ViewHolder(item)  {
+        fun bind(note:Note){
+            item.noteId.text=note.id.toString()
+            item.noteText.text=note.text
+            item.setOnClickListener{
+                val direction=NoteListFragmentDirections.actionNoteListFragmentToNoteDetailFragment()
+                it.findNavController().navigate(direction)
+            }
+        }
     }
 }

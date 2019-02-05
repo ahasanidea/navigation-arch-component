@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 
 import com.ahasanidea.navcom.R
+import com.ahasanidea.navcom.utils.closeSoftKeyboard
 import com.ahasanidea.navcom.viewmodels.AddNoteViewModel
 import kotlinx.android.synthetic.main.fragment_add_note.*
 
@@ -36,7 +37,7 @@ class AddNoteFragment : Fragment() {
         addNoteText.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewModel.addNote(v.text.toString())
-                //v.closeSoftKeyboard()
+                v.closeSoftKeyboard()
                 true
             } else {
                 false

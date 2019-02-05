@@ -10,6 +10,8 @@
               tools:layout="@layout/note_list_fragment">
         <action android:id="@+id/action_noteListFragment_to_addNoteFragment"
                 app:destination="@id/addNoteFragment"/>
+        <action android:id="@+id/action_noteListFragment_to_noteDetailFragment"
+                app:destination="@id/noteDetailFragment"/>
     </fragment>
     <fragment android:id="@+id/searchFragment"
               android:name="com.ahasanidea.navcom.fragments.SearchFragment"
@@ -19,4 +21,6 @@
               android:name="com.ahasanidea.navcom.fragments.AddNoteFragment"
               android:label="fragment_add_note"
               tools:layout="@layout/fragment_add_note"/>
+    <fragment android:id="@+id/noteDetailFragment" android:name="com.ahasanidea.navcom.fragments.NoteDetailFragment"
+              android:label="NoteDetailFragment"/>
 </navigation>
