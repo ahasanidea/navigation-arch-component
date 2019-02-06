@@ -32,7 +32,7 @@ class NoteAdapter(val noteList:List<Note>) : RecyclerView.Adapter<NoteAdapter.Vi
             item.noteId.text=note.id.toString()
             item.noteText.text=note.text
             item.setOnClickListener{
-                val direction=NoteListFragmentDirections.actionNoteListFragmentToNoteDetailFragment()
+                val direction=NoteListFragmentDirections.actionNoteListFragmentToNoteDetailFragment(note.id)
                 it.findNavController().navigate(direction)
             }
         }

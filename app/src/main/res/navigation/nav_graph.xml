@@ -6,7 +6,7 @@
 
     <fragment android:id="@+id/noteListFragment"
               android:name="com.ahasanidea.navcom.fragments.NoteListFragment"
-              android:label="note_list_fragment"
+              android:label="Note List"
               tools:layout="@layout/note_list_fragment">
         <action android:id="@+id/action_noteListFragment_to_addNoteFragment"
                 app:destination="@id/addNoteFragment"/>
@@ -21,6 +21,10 @@
               android:name="com.ahasanidea.navcom.fragments.AddNoteFragment"
               android:label="fragment_add_note"
               tools:layout="@layout/fragment_add_note"/>
-    <fragment android:id="@+id/noteDetailFragment" android:name="com.ahasanidea.navcom.fragments.NoteDetailFragment"
-              android:label="NoteDetailFragment"/>
+    <fragment android:id="@+id/noteDetailFragment"
+              android:name="com.ahasanidea.navcom.fragments.NoteDetailFragment"
+              android:label="Note Detail"
+              tools:layout="@layout/fragment_note_detail">
+        <argument android:name="noteId" app:argType="integer"/>
+    </fragment>
 </navigation>
