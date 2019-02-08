@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 
 import com.ahasanidea.navcom.R
 import com.ahasanidea.navcom.data.Note
@@ -40,6 +42,9 @@ class NoteDetailFragment : Fragment() {
         viewModel.getNote(noteId).observe(this, Observer { note ->
             note?.let { render(note) } ?: renderNoteNotFound()
         })
+        val bundle= bundleOf("noteId" to noteId)
+        editNoteButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_noteDetailFragment_to_editNoteFragment,bundle))
+        deleteNoteButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_noteDetailFragment_to_deleteNoteFragment,bundle))
     }
     private fun render(note: Note) {
         noteIdView.text = String.format(getString(R.string.id_s), note.id)

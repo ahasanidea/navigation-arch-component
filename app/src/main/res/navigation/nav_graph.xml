@@ -25,6 +25,24 @@
               android:name="com.ahasanidea.navcom.fragments.NoteDetailFragment"
               android:label="Note Detail"
               tools:layout="@layout/fragment_note_detail">
+        <argument
+                android:name="noteId" app:argType="integer"/>
+        <action
+                android:id="@+id/action_noteDetailFragment_to_deleteNoteFragment"
+                app:destination="@id/deleteNoteFragment"/>
+        <action android:id="@+id/action_noteDetailFragment_to_editNoteFragment" app:destination="@id/editNoteFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/deleteNoteFragment"
+            android:name="com.ahasanidea.navcom.fragments.DeleteNoteFragment"
+            android:label="fragment_delete_note"
+            tools:layout="@layout/fragment_delete_note">
+        <argument android:name="noteId" app:argType="integer"/>
+    </fragment>
+    <fragment android:id="@+id/editNoteFragment"
+              android:name="com.ahasanidea.navcom.fragments.EditNoteFragment"
+              android:label="fragment_edit_note"
+              tools:layout="@layout/fragment_edit_note">
         <argument android:name="noteId" app:argType="integer"/>
     </fragment>
 </navigation>
