@@ -23,7 +23,9 @@ import kotlinx.android.synthetic.main.fragment_delete_note.*
  *
  */
 class DeleteNoteFragment : Fragment() {
+
     private lateinit var viewModel: DeleteNoteViewModel
+
     private val noteId by lazy {
         fromBundle(arguments!!).noteId
     }
@@ -48,15 +50,19 @@ class DeleteNoteFragment : Fragment() {
             deleteStatus?.let { render(deleteStatus) }
         })
 
-        viewModel.initNote(noteId)
-
         cancelDeleteButton.setOnClickListener{
             it.findNavController().popBackStack()
         }
+
         confirmDeleteButton.setOnClickListener{
             viewModel.deleteNote(noteId)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.initNote(noteId)
     }
 
     private fun render(deleteStatus: Boolean?) {

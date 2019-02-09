@@ -10,13 +10,17 @@ import com.ahasanidea.navcom.data.NotesManager
 import java.lang.IllegalArgumentException
 
 class EditNoteViewModel() : ViewModel() {
+    //Encapsulation
     private val currentNote = MutableLiveData<Note>()
     private val editStatus = MutableLiveData<Boolean>()
 
+    //publicly exposed LiveData, not mutable
     val observableCurrentNote:LiveData<Note>
     get() = currentNote
+
     val observableEditStatus:LiveData<Boolean>
     get() = editStatus
+
     //edit note
     fun editNote(id:Int,noteText:String){
         editStatus.value=try {
@@ -26,6 +30,7 @@ class EditNoteViewModel() : ViewModel() {
             false
         }
     }
+
     //initialize current note
     fun initNote(id:Int){
         currentNote.value=NotesManager.getNote(id)

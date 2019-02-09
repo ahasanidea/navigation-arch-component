@@ -7,9 +7,13 @@ import com.ahasanidea.navcom.data.Note
 import com.ahasanidea.navcom.data.NotesManager
 
 class NoteDetailViewModel : ViewModel() {
-    private val note=MutableLiveData<Note>()
-    fun getNote(id:Int):LiveData<Note>{
-        note.value=NotesManager.getNote(id)
-        return note
+    //Encapsulation
+    private val note = MutableLiveData<Note>()
+    //publicly exposed LiveData, not mutable
+    val onservableNote: LiveData<Note>
+        get() = note
+
+    fun getNote(id: Int){
+        note.value = NotesManager.getNote(id)
     }
 }

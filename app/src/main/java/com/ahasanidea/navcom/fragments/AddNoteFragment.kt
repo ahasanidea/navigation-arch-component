@@ -19,7 +19,9 @@ import kotlinx.android.synthetic.main.fragment_add_note.*
 
 
 class AddNoteFragment : Fragment() {
- private lateinit var viewModel:AddNoteViewModel
+
+    private lateinit var viewModel: AddNoteViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,10 +32,12 @@ class AddNoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProviders.of(this).get(AddNoteViewModel::class.java)
         viewModel.observableStatus.observe(this, Observer { status ->
             status?.let { render(status) }
         })
+
         addNoteText.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewModel.addNote(v.text.toString())
@@ -47,8 +51,8 @@ class AddNoteFragment : Fragment() {
     }
 
     private fun render(status: Boolean?) {
-        when(status){
-            true->{
+        when (status) {
+            true -> {
                 view?.let {
                     it.findNavController().popBackStack()
                 }

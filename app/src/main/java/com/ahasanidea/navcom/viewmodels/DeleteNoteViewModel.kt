@@ -8,10 +8,14 @@ import com.ahasanidea.navcom.data.NotesManager
 import java.lang.IllegalArgumentException
 
 class DeleteNoteViewModel : ViewModel() {
+    //Encapsulation
     private val currentNote = MutableLiveData<Note>()
     private val deleteStatus = MutableLiveData<Boolean>()
+
+    //publicly exposed LiveData, not mutable
     val observableCurrentNote: LiveData<Note>
         get() = currentNote
+
     val observableDeleteStatus: LiveData<Boolean>
         get() = deleteStatus
 

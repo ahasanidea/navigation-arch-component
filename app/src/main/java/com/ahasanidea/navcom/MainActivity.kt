@@ -11,23 +11,24 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        navController=Navigation.findNavController(this,R.id.nav_host_fragment)
-        appBarConfiguration= AppBarConfiguration(navController.graph,drawer_layout)
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        appBarConfiguration = AppBarConfiguration(navController.graph, drawer_layout)
 
         //setup ActionBar
         setSupportActionBar(toolbar)
-        setupActionBarWithNavController(navController,appBarConfiguration)
-       // Tie nav graph to items in nav drawer
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        // Tie nav graph to items in nav drawer
         NavigationUI.setupWithNavController(nav_view, navController)
 
     }
+
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, drawer_layout)
     }
@@ -39,8 +40,6 @@ class MainActivity : AppCompatActivity(){
             super.onBackPressed()
         }
     }
-
-
 
 
 }

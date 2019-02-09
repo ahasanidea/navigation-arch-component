@@ -38,17 +38,23 @@ class EditNoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProviders.of(this).get(EditNoteViewModel::class.java)
         viewModel.observableCurrentNote.observe(this, Observer { currentNote ->
             currentNote?.let { initCurrentNote(currentNote) }
         })
+
         viewModel.observableEditStatus.observe(this, Observer { editStatus ->
             editStatus?.let { render(editStatus) }
         })
 
-        viewModel.initNote(noteId)
         setupEditNoteSubmitHandling()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.initNote(noteId)
     }
 
     private fun render(editStatus: Boolean) {

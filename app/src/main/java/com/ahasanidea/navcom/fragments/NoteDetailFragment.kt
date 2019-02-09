@@ -24,10 +24,13 @@ import kotlinx.android.synthetic.main.fragment_note_detail.*
  *
  */
 class NoteDetailFragment : Fragment() {
-    private lateinit var viewModel:NoteDetailViewModel
+
+    private lateinit var viewModel: NoteDetailViewModel
+
     private val noteId by lazy {
         fromBundle(arguments!!).noteId
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,14 +41,33 @@ class NoteDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProviders.of(this).get(NoteDetailViewModel::class.java)
-        viewModel.getNote(noteId).observe(this, Observer { note ->
+        viewModel.onservableNote.observe(this, Observer { note ->
             note?.let { render(note) } ?: renderNoteNotFound()
         })
-        val bundle= bundleOf("noteId" to noteId)
-        editNoteButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_noteDetailFragment_to_editNoteFragment,bundle))
-        deleteNoteButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_noteDetailFragment_to_deleteNoteFragment,bundle))
+
+        val bundle = bundleOf("noteId" to noteId)
+        editNoteButton.setOnClickListener(
+            Navigation.createNavigateOnClickListener(
+                R.id.action_noteDetailFragment_to_editNoteFragment,
+                bundle
+            )
+        )
+
+        deleteNoteButton.setOnClickListener(
+            Navigation.createNavigateOnClickListener(
+                R.id.action_noteDetailFragment_to_deleteNoteFragment,
+                bundle
+            )
+        )
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getNote(noteId)
+    }
+
     private fun render(note: Note) {
         noteIdView.text = String.format(getString(R.string.id_s), note.id)
         noteText.text = String.format(getString(R.string.text_s), note.text)

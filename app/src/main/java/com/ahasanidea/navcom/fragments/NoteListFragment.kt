@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.note_list_fragment.*
 
 
 class NoteListFragment : Fragment() {
+
 private lateinit var viewModel:NoteListViewModel
 
     override fun onCreateView(
